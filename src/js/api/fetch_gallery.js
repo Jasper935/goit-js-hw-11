@@ -4,7 +4,7 @@ export default function fetchGallery(name, page){
    const apiKey = '28349117-93ec80a92256e0e2caaa1ba86'
 //     const filters = `q=${name}&image_type=photo&page=${page}`
    return axios({
-     url: 'https://pixabay.com/api',
+     url: 'http://pixabay.com/api',
     params:{
         key: apiKey,
         q: name,
