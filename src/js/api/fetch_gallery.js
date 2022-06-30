@@ -1,44 +1,29 @@
 import axios from "axios"
-export default function fetchGallery(name, page){
-//     const url ='https://pixabay.com/api'
-   const apiKey = '28349117-93ec80a92256e0e2caaa1ba86'
-//     const filters = `q=${name}&image_type=photo&page=${page}`
-   return axios({
-     url: 'http://pixabay.com/api',
-    params:{
-        key: apiKey,
-        q: name,
-        orientation: 'horizontal',
-        image_type: 'photo',
-        safesearch: true,
-        page: page,
-        per_page: 40
+export default async function fetchGallery(name, page) {
+
+    const apiKey = '28349117-93ec80a92256e0e2caaa1ba86'
+    const response = await axios({
+        
+        url: 'https://pixabay.com/api/',
+        params: {
+            
+            key: apiKey,
+            q: name,
+            orientation: 'horizontal',
+            image_type: 'photo',
+            safesearch: true,
+            page: page,
+            per_page: 40
+        }
+
     }
-
-   }
-//    (`${url}?${apiKey}&${filters}`)
-//    .then(res=>{ 
-    // if (res.ok) {
-        
-    //     return res.json()
-        
-    // }
-    
-// }
-)
-// .catch(error=>
-//     console.log(error))
-
+    )
+    console.log(response);
+    // const res = await response.json();
+    return response
 }
 
 
 
 
 
-
-
-
-
-// import SimpleLightbox from "simplelightbox";
-// // Дополнительный импорт стилей
-// import "simplelightbox/dist/simple-lightbox.min.css";

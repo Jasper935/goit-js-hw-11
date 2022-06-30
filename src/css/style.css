@@ -1,0 +1,78 @@
+html {
+    font-family: Helvetica, sans-serif;
+    font-size: 12px;
+  }
+  
+  a {
+    text-decoration: none;
+    color: black;
+  }
+  
+  img {
+    display: block;
+    width: 100%;
+  
+    object-fit: cover;
+  }
+  
+  .gallery {
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 60px;
+  }
+  
+  .photo-card {
+    height: 300px;
+    width: calc((100% / 3)- 90px);
+    position: relative;
+    background-color: rgb(201, 209, 232);
+  
+    border-radius: 20px;
+  
+    overflow: hidden;
+  
+    transition: 0.3s;
+  }
+  
+  /* .photo-card::after {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.235);
+  
+    width: 100%;
+    height: 100%;
+  
+    opacity: 0;
+    transition: 0.2s;
+  } */
+  
+  .photo-card:hover {
+    /* transform: scale(1.02); */
+    box-shadow: 450px 0 0 0 rgba(0,0,0,.3) inset;
+  }
+  
+  .info {
+    display: flex;
+    justify-content: space-around;
+    padding: 15px;
+  }
+  
+  .photo-card .info b {
+    opacity: 1;
+    transition: 0.2s;
+    color: rgb(130, 84, 84);
+    
+  }
+  .photo-card:hover .info b {
+    position: relative;
+    z-index: 200;
+    color: rgb(0, 0, 0);
+    
+  }

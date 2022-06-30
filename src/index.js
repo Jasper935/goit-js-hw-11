@@ -19,14 +19,16 @@ const options = {
 const observer = new IntersectionObserver(updateCards, options);
 
 function updateCards(entries) {
-    
+
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             page += 1;
             fetchGallery(queryInput, page).then(res => {
                 if (res.data.hits.length === 0) {
                     Notiflix.Notify.failure(`Were sorry, but yo'uve reached the end of search results.`)
+                    observer.unobserve(target)
                     return
+
                 }
                 createMarkUp(res)
             });
@@ -42,29 +44,36 @@ function onSubmit(evt) {
         Notiflix.Notify.failure('Enter any value!')
         return
     }
+    page = 1
+    observer.unobserve(target)
     div.innerHTML = ''
 
 
-    fetchGallery(queryInput).then(res => {
-        div.insertAdjacentHTML('beforeend', createMarkUp(res));
+    fetchGallery(queryInput, page).then(res => {
+        createMarkUp(res)
         observer.observe(target)
 
         if (res.data.hits.length === 0) {
             Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again')
+            observer.unobserve(target)
             div.innerHTML = ''
-        } else {
+        } else if (res.data.hits.length <= 40){
+            observer.unobserve(target)
             Notiflix.Notify.success(`Hooray! We found ${res.data.total} images.`);
         }
-    })
+        else {
+            Notiflix.Notify.success(`Hooray! We found ${res.data.total} images.`);
+        }
+    }).catch(err => console.log(err))
 }
 
 function createMarkUp(res) {
     // console.log();
 
     const markUp = res.data.hits.map(el =>
-        ` <div class="photo-card">
+        `<div class="photo-card">
     <a href="${el.largeImageURL}">
-    <img src='${el.webformatURL}' alt="" loading="lazy" width='200' />
+    <img src='${el.webformatURL}' alt="${el.tags}" loading="lazy" width='200' />
     </a>
     <div class="info">
       <p class="info-item">
@@ -80,8 +89,8 @@ function createMarkUp(res) {
         <b>Downloads: ${el.downloads}</b>
       </p>
     </div>
-  </div>` )
-
+    </div>`).join('')
+    console.log(markUp);
     div.insertAdjacentHTML('beforeend', markUp)
     const lightbox = new SimpleLightbox('.gallery a', { /* options */ });
 
