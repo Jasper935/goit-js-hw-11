@@ -59,11 +59,11 @@ function onSubmit(evt) {
             div.innerHTML = ''
         } else if (res.data.totalHits.length <= 40){
             observer.unobserve(target)
-            Notiflix.Notify.success(`Hooray! We found ${res.data.total} images.`);
+            Notiflix.Notify.success(`Hooray! We found ${res.data.totalHits} images.`);
             Notiflix.Notify.failure(`Were sorry, but yo'uve reached the end of search results.`)
         }
         else {
-            Notiflix.Notify.success(`Hooray! We found ${res.data.total} images.`);
+            Notiflix.Notify.success(`Hooray! We found ${res.data.totalHits} images.`);
         }
     }).catch(err => console.log(err))
 }
