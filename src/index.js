@@ -57,9 +57,10 @@ function onSubmit(evt) {
             Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again')
             observer.unobserve(target)
             div.innerHTML = ''
-        } else if (res.data.hits.length <= 40){
+        } else if (res.data.totalHits.length <= 40){
             observer.unobserve(target)
             Notiflix.Notify.success(`Hooray! We found ${res.data.total} images.`);
+            Notiflix.Notify.failure(`Were sorry, but yo'uve reached the end of search results.`)
         }
         else {
             Notiflix.Notify.success(`Hooray! We found ${res.data.total} images.`);
